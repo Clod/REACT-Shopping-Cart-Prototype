@@ -1,14 +1,15 @@
 import React from 'react';
 import './ProductList.css';
-import { useDispatch } from 'react-redux';
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { addItemToCart } from './CartSlice';
 
 const ProductList = () => {
 
   const dispatch = useDispatch();
-  // State to store disabled products
-  const [disabledProducts, setDisabledProducts] = useState([]);
+  // Get cart items from Redux store
+  const cartItems = useSelector(state => state.cart.cartItems);
+  // Derive disabled products from cart items
+  const disabledProducts = cartItems.map(item => item.id);
 
   const products = [
     { id: 1, name: 'Product A', price: 60 },
@@ -19,10 +20,6 @@ const ProductList = () => {
   const handleAddToCart = product => {
     // Dispatch the addItemToCart action with the product as the payload
     dispatch(addItemToCart(product));
-    // Add the product ID to the disabledProducts state to disable 
-    // the button after adding to cart to prevent adding the same 
-    // product multiple times
-    setDisabledProducts([...disabledProducts, product.id]); 
   };
 
   return (
