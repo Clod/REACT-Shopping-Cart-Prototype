@@ -27,3 +27,8 @@
     border-radius: 5px;
     cursor: pointer;
   }
+
+  .add-to-cart-btn:disabled {
+    background-color: gray; /* Change to gray when disabled */
+    cursor: not-allowed; /* Optional: Change cursor to indicate the button is disabled */
+  }
